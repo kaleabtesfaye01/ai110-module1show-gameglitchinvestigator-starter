@@ -4,26 +4,43 @@ Answer each question in 3 to 5 sentences. Be specific and honest about what actu
 
 ## 1. What was broken when you started?
 
-- What did the game look like the first time you ran it?
-- List at least two concrete bugs you noticed at the start  
-  (for example: "the secret number kept changing" or "the hints were backwards").
+- <strong>Inverted Directional Hints</strong>
+  - <strong>Expected:</strong> Guessing lower than the secret number should trigger a "Go Higher" hint.
+  - <strong>Actual:</strong> The game provides a "Go Lower" hint for low guesses and "Go Higher" for high guesses.
+- <strong>Lack of Input Validation</strong>
+  - <strong>Expected:</strong> Entering a number outside the defined range should trigger an error message and not consume an attempt.
+  - <strong>Actual:</strong> Out-of-bounds guesses are accepted, and the user loses an attempt for an invalid entry.
+- <strong>Submit Button Latency</strong>
+  - <strong>Expected:</strong> Clicking "Submit Guess" once should immediately provide feedback and update the debug history.
+  - <strong>Actual:</strong> After the first guess, the button must be clicked twice to trigger a response. The debug history also fails to update on the first click.
+- <strong>New Game Initialization Failure</strong>
+  - <strong>Expected:</strong> Clicking "New Game" should reset the secret number, clear the history log and reset the attempt counter.
+  - <strong>Actual:</strong> While the secret number and attempts reset, the history persists on screen and the "Submit Guess" button becomes unresponsive.å
+- <strong>Difficulty Scaling Inversion</strong>
+  - <strong>Expected:</strong> "Normal" difficulty should be more challenging (fewer attempts/larger range) than "Easy".
+  - <strong>Actual:</strong> "Easy" mode is currently harder than "Normal," offering fewer attempts to the player.
+- <strong>Settings vs. Main Display Mismatch</strong>
+  - <strong>Expected:</strong> The range and attempts defined in the Settings menu should match the values displayed on the Game screen.
+  - <strong>Actual:</strong> There is a discrepancy between the two; the game does not correctly pull the configuration values into the main UI.
 
 ---
 
 ## 2. How did you use AI as a teammate?
 
-- Which AI tools did you use on this project (for example: ChatGPT, Gemini, Copilot)?
-- Give one example of an AI suggestion that was correct (including what the AI suggested and how you verified the result).
-- Give one example of an AI suggestion that was incorrect or misleading (including what the AI suggested and how you verified the result).
+I used <strong>Claude Code</strong> to investigate and repair the bugs.
+
+- <strong> Bug 1: Inverted Directional Hints</strong>
+  - <strong>Correct AI suggestion example:</strong> The hint messages in check_guess are swapped relative to the outcome labels.
+  - <strong>Incorrect AI suggestion example:</strong> No incorrect suggestion for this bug encountered.
 
 ---
 
 ## 3. Debugging and testing your fixes
 
-- How did you decide whether a bug was really fixed?
-- Describe at least one test you ran (manual or using pytest)  
-  and what it showed you about your code.
-- Did AI help you design or understand any tests? How?
+I tested the fixes by unit tests using Pytest and manual tests. <strong>Claude code</strong> helped design the unit tests based on the parameters I provided.
+
+- <strong> Bug 1: Inverted Directional Hints</strong>
+  - A <strong>manual test</strong> revealed that a guess of "34" against a secret of "4" incorrectly triggered a "Higher" hint because the secret was being cast as a string on even attempts, causing a lexicographical comparison that Claude fixed by ensuring the values remained integers.
 
 ---
 
