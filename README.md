@@ -48,7 +48,6 @@ Using **Claude Code** as by AI teammate, I applied the following fixes:
 ## 📸 Demo
 
 ![Demo](screenshots/demo.png)
-![Train](screenshots/test.png)
 
 ## 🚀 Stretch Features
 
