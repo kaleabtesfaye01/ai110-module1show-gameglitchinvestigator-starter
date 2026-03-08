@@ -53,15 +53,18 @@ I tested the fixes by unit tests using Pytest and manual tests. <strong>Claude c
 
 ## 4. What did you learn about Streamlit and state?
 
-- In your own words, explain why the secret number kept changing in the original app.
-- How would you explain Streamlit "reruns" and session state to a friend who has never used Streamlit?
-- What change did you make that finally gave the game a stable secret number?
+### The Mystery of the Changing Secret
+
+The secret number remained stable because it was stored in `st.session_state`. In a standard script, a variable is recreated every time the code runs. However, because the original app used session state, the secret was "remembered" across reruns and only updated when specific triggers—like a new game or a difficulty change—reset that specific state variable.
+
+### Explaining "Reruns" to a Friend
+
+Imagine a website that **refreshes the entire page** every single time you click a button or type a letter. That is a Streamlit "rerun." To prevent the app from "forgetting" everything you just did (like your score or the secret number), Streamlit uses **Session State**. Think of Session State as a small notepad on the side where Streamlit scribbles down important info before it restarts the script, so it can read it back and pick up exactly where it left off.
 
 ---
 
 ## 5. Looking ahead: your developer habits
 
-- What is one habit or strategy from this project that you want to reuse in future labs or projects?
-  - This could be a testing habit, a prompting strategy, or a way you used Git.
-- What is one thing you would do differently next time you work with AI on a coding task?
-- In one or two sentences, describe how this project changed the way you think about AI generated code.
+- **Future Strategy:** I plan to prioritize **writing unit tests** for functional logic early in the process.
+- **AI Collaboration Improvement:** Next time, I will focus on asking **highly specific, context-heavy questions**.
+- **Reflecting on AI Code:** This project showed me that **Prompt Engineering** is important for quality code generation.
