@@ -33,6 +33,10 @@ I used <strong>Claude Code</strong> to investigate and repair the bugs.
   - <strong>Correct AI suggestion example:</strong> The hint messages in check_guess are swapped relative to the outcome labels.
   - <strong>Incorrect AI suggestion example:</strong> No incorrect suggestion for this bug encountered.
 
+- <strong> Bug 2: Lack of Input Validation</strong>
+  - <strong>Correct AI suggestion example:</strong> The "parse_guess" function only checks if the input is empty and if it is a number. There is no range check.
+  - <strong>Incorrect AI suggestion example:</strong> Claude missed that the attempt number was incremented before the guess check was completed. Hence, even for guesses that aren't within the given parameters the attempt number would increase.
+
 ---
 
 ## 3. Debugging and testing your fixes
@@ -41,6 +45,9 @@ I tested the fixes by unit tests using Pytest and manual tests. <strong>Claude c
 
 - <strong> Bug 1: Inverted Directional Hints</strong>
   - A <strong>manual test</strong> revealed that a guess of "34" against a secret of "4" incorrectly triggered a "Higher" hint because the secret was being cast as a string on even attempts, causing a lexicographical comparison that Claude fixed by ensuring the values remained integers.
+
+- <strong> Bug 2: Lack of Input Validation</strong>
+  - A <strong>manual test</strong> revealed that even for the "Easy" level the screen showed a message of "Enter number between 1 and 100" and the secret was higher than 20. This was another bug in the application. The main screen message was hardcoded and the secret was randomly generated from 0 - 100 all the time.
 
 ---
 
